@@ -17,16 +17,16 @@ to make sure that network calls should be done on IO dispatcher.
 
 Mistake #4 : Forwarding CancellationException to ParentScope. If any CancellationException occure in suspend function that that should be forward to the Parent scope.
         - example
-        ```
-          try {
-              println("The answer is ${10 / 0}")
-          } catch (ex: Exception) {
-              if (ex is CancellationException) {
-                  throw ex
-              }
-              println("Oops, that didn't work")
-          }
-        ```
+```kotlin
+try {
+        println("The answer is ${10 / 0}")
+} catch (ex: Exception) {
+        if (ex is CancellationException) {
+          throw ex
+        }
+        println("Oops, that didn't work")
+}
+```
 
 Mistake #5 : Exposing ViewModel suspend functions to the UI.
           Well ViewModel shouldn't expose the suspend function to the UI. Reason because <u>Activity lifecycle</u> will be destryed when activity will be destroyed.
